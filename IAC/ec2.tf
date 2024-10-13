@@ -1,16 +1,16 @@
 module "instance" {
   source                      = "cloudposse/ec2-instance/aws"
-  version = "v0.47.1"
   ssh_key_pair                = aws_key_pair.generated_key.key_name
-  instance_type               = "t2.micro"
+  instance_type               = "t3.medium"
   availability_zone           = "us-east-1a"
+  root_volume_size            = 60 
   vpc_id                      = aws_vpc.main.id
   security_groups             = [aws_security_group.allow_all.id]
   subnet                      = aws_subnet.main.id
   name                        = "proxy-instance"
   namespace                   = "eg"
   stage                       = "dev"
-  ami                         = data.aws_ami.amzn2.id
+  ami                         = data.aws_ami.win2022.id
   associate_public_ip_address = true
   instance_profile = aws_iam_instance_profile.ec2_ssm_instance_profile.name
 }
@@ -134,19 +134,34 @@ output "private_key" {
 
 
 # Selecting AMI for the instance
-data "aws_ami" "amzn2" {
+# data "aws_ami" "amzn2" {
+#   owners      = ["amazon"]
+#   most_recent = true
+#   filter {
+#     name = "name"
+#     values = ["amzn2-ami-hvm-2*"]
+#   }
+# }
+
+#windows AMI
+data "aws_ami" "win2022" {
   owners      = ["amazon"]
   most_recent = true
   filter {
     name = "name"
-    values = ["amzn2-ami-hvm-2*"]
+    values = ["Windows_Server-2022-English-Full-Base-*"]
+  }
+  filter {
+    name = "architecture"
+    values = ["x86_64"]
   }
 }
 
+
 output "ami_id" {
-  value = data.aws_ami.amzn2.id
+  value = data.aws_ami.win2022.id
 }
 
 output "ami_name" {
-  value = data.aws_ami.amzn2.name
+  value = data.aws_ami.win2022.name
 }
