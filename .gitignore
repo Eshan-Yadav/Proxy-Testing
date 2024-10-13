@@ -1,0 +1,6 @@
+IAC/key.tf
+IAC/.terraform/
+IAC/.terraform*
+IAC/*tfstate*
+IAC/key*
+*.pem
