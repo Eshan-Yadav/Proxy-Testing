@@ -1,5 +1,6 @@
 module "instance" {
   source                      = "cloudposse/ec2-instance/aws"
+  version = "0.47.1"
   ssh_key_pair                = aws_key_pair.generated_key.key_name
   instance_type               = "t3.medium"
   availability_zone           = "us-east-1a"
@@ -45,7 +46,7 @@ resource "aws_iam_role_policy_attachment" "ec2_ssm_policies" {
 
 
 resource "aws_iam_instance_profile" "ec2_ssm_instance_profile" {
-  name = "ec2-ssm-instance-profile"
+  name = "ec2-ssm-instance-profile-test"
   role = aws_iam_role.ec2_ssm_role.name
 }
 
