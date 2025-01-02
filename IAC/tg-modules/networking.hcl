@@ -1,0 +1,9 @@
+terraform {
+  source = "../tf-moudules/networking"
+
+  # Always include the following file patterns in the Terragrunt copy.
+  include_in_copy = [
+    ".security_group_rules.json",
+    "*.yaml",
+  ]
+}
