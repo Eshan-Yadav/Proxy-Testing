@@ -1,4 +1,4 @@
 locals {
-  account_name    = "ey-personal"
+  account_name    = "ydv-ey-personal"
   aws_account_ids = "325657706626"
 } 

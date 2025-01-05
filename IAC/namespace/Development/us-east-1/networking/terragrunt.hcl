@@ -1,8 +1,8 @@
 
 
 locals {
-  aws_region_vars    = read_terragrunt_config(find_in_parent_folder("region.hcl"))
-  aws_namespace_vars = find_in_parent_folder("namespace.hcl")
+  aws_region_vars    = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals
+  aws_namespace_vars = read_terragrunt_config(find_in_parent_folders("namespace.hcl")).locals
 
 
 
@@ -10,9 +10,8 @@ locals {
   aws_namespace = local.aws_namespace_vars.environment
 }
 
-
-input {
-
+inputs = {
+  namespace = aws_namespace
 }
 
 
@@ -21,8 +20,7 @@ include "root" {
 }
 
 include "networking" {
-  path = find_in_parent_folders("networking.hcl")
-
+  path = "${dirname(find_in_parent_folders("root.hcl"))}/../tg-modules/networking.hcl"
 }
 
 

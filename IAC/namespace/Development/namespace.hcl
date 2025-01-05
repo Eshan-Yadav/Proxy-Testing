@@ -1,3 +1,3 @@
 locals {
-  environment = "Dev"
+  environment = "dev"
 }
