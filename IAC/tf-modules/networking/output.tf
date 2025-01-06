@@ -13,22 +13,24 @@ output "igw_id" {
   value       = module.vpc.igw_id
 }
 
+#Public subnet
 output "public_subnet_id" {
   description = "The ID of the public subnet"
-  value       = module.public_subnet.subnet_ids[0]
+  value       = module.public_subnet.public_subnet_ids
 }
 
 output "public_subnet_cidr" {
   description = "The CIDR block of the public subnet"
-  value       = module.public_subnet.cidr_block
+  value       = module.public_subnet.public_subnet_cidrs
 }
 
+#Private Subnet
 output "private_subnet_id" {
   description = "The ID of the private subnet"
-  value       = module.private_subnet.subnet_ids[0]
+  value       = module.private_subnet.private_subnet_ids
 }
 
 output "private_subnet_cidr" {
   description = "The CIDR block of the private subnet"
-  value       = module.private_subnet.cidr_block
+  value       = module.private_subnet.private_subnet_cidrs
 }

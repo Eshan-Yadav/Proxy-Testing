@@ -15,7 +15,7 @@ module "public_subnet" {
   availability_zones = ["us-east-1a"]
   vpc_id             = module.vpc.vpc_id
   igw_id             = [module.vpc.igw_id]
-  ipv4_cidr_block          = "10.0.0.0/17"
+  ipv4_cidr_block          = ["10.0.0.0/17"]
 }
 
 module "private_subnet" {
@@ -25,7 +25,7 @@ module "private_subnet" {
   name               = "app-${var.namespace}-private"
   availability_zones = ["us-east-1b"]
   vpc_id             = module.vpc.vpc_id
-  ipv4_cidr_block          = "10.0.128.0/17"
+  ipv4_cidr_block          = ["10.0.128.0/17"]
 
   nat_gateway_enabled    = false
   public_subnets_enabled = false

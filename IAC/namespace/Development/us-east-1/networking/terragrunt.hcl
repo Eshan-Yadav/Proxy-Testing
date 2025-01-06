@@ -11,7 +11,7 @@ locals {
 }
 
 inputs = {
-  namespace = aws_namespace
+  namespace = local.aws_namespace
 }
 
 
